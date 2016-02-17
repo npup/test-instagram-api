@@ -1,0 +1,113 @@
+@import "slanted";
+
+/**********************
+* colors
+**********************/
+$main_bg_color: #142433;
+$main_text_color: #ededed;
+$banner_text_color: #11509f;
+$banner_bg_color: #ffdd00;
+$nav_text_color: #f8f8f8;
+
+$nav_bg_color1: #149044;
+$nav_bg_color2: #ed741e;
+$nav_bg_color3: #11509f;
+$active_nav_glow_color: #f8f8f8;
+
+$post_bg_color: #e0e0e0;
+$post_glow_color: #eee;
+
+
+html, html * { box-sizing: border-box; }
+body {
+  margin: 0;
+  background-color: $main_bg_color;
+}
+
+// general styles
+ul { list-style-type: none; }
+a {
+  color: inherit;
+  &:link, &:visited, &:hover, &:active  {
+    text-decoration: underline;
+  }
+  &.active {
+    text-decoration: none;
+    font-weight: bold;
+    &.slanted::before {
+      box-shadow:  .2em .2em .5em $active_nav_glow_color;
+    }
+  }
+}
+
+// app area
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: Verdana, Arial, Sans-serif;
+  padding: 1em;
+  color: $main_text_color;
+}
+
+// headings
+h1 {
+  color: $banner_text_color;
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+  &.slanted:before {
+    background-color: $banner_bg_color;
+  }
+}
+h2 {
+  text-indent: .5em;
+}
+
+// nav
+ul.nav {
+  height: 1em;
+  padding-left: 0;
+  margin: 2em auto 3em;
+  width: 90%;
+  color: $nav_text_color;
+  li {
+    float: left;
+    width: 33.3%;
+    text-align: center;
+  }
+}
+li:nth-child(1) .slanted:before { background-color: $nav_bg_color1; }
+li:nth-child(2) .slanted:before { background-color: $nav_bg_color2; }
+li:nth-child(3) .slanted:before { background-color: $nav_bg_color3; }
+
+// content
+p {
+  padding: 0 .25em;
+  line-height: 1.6em;
+  &:first-of-type {
+    text-indent: 1em;
+  }
+}
+
+// posts
+ul.posts {
+  padding-left: 0;
+  color: $main_bg_color;
+  li {
+    padding: .5em;
+    box-shadow: .2em .2em .3em $post_glow_color;
+    margin: 0 auto 1em;
+    background-color: $post_bg_color;
+    border-radius: .2em;
+    max-width: 95%;
+  }
+  .ts {
+    font-size: .7em;
+  }
+  img {
+    display: block;
+    margin-top: .5em;
+  }
+}
+
+
