@@ -1,25 +1,36 @@
 import assert from "proclaim";
 
-import dom from "./dom";
-import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-
 import About from "../../src/components/About";
 
 describe("About", () => {
 
-  describe("rendering", () => {
+  it("should be defined as an object", function () {
+    assert.isObject(About);
+  });
 
-    before(function() {
-      this.renderedContainer = TestUtils.renderIntoDocument(
-        <About />
-      );
+  it("should have a `render` method", function () {
+    assert.isFunction(About.render);
+  });
+
+  describe("render", () => {
+
+    before(function () {
+      this.about = About.render();
     });
 
-    it("should render the about component", function () {
-      const container = ReactDOM.findDOMNode(this.renderedContainer);
-      assert.isNotNull(container, "did not find container");
+    it("should accept 0 parameters", () => {
+      assert.equal(About.render.length, 0);
+    });
+
+    it("should return an object with an `element` property that is a DocumentFragment", function () {
+      assert.isNotNull(this.about);
+      const elem = this.about.element;
+      assert.isInstanceOf(elem, DocumentFragment);
+    });
+
+    it("should render the About component", function () {
+      const container = document.createElement("div");
+      container.appendChild(this.about.element);
       const heading = container.querySelector("h2");
       assert.isNotNull(heading, "did not find heading");
       const paragraphs = container.querySelectorAll("p");

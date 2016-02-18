@@ -9,11 +9,11 @@ module.exports = {
     "loaders": [
       { "test": /\.scss$/, "loader": "style!css!sass" }
       , {
-        "test": /.jsx?$/,
+        "test": /.js$/,
         "loader": "babel-loader",
         "exclude": /node_modules/,
         "query": {
-          "presets": ["es2015", "react"]
+          "presets": ["es2015"]
         }
       }
     ]

@@ -1,36 +1,10 @@
-// React imports
-import React from "react";
-import ReactDOM from "react-dom";
-import { Router, Route, hashHistory as history } from "react-router";
-
 // Components
-import App from "./components/App.jsx";
-import About from "./components/About.jsx";
-import Posts from "./components/Posts.jsx";
-import Post from "./components/Post.jsx";
+import App from "./components/App";
 
 // app imports
 import { checkToken, requestToken } from "./util/auth";
 import { checkTagName, storeTagName, removeTagName } from "./util/storage";
 import mediaLoader from "./util/load-media";
-
-
-const renderApp = () => {
-  const PostsWrapper = React.createClass({
-    render() { return <Posts load={load} params={this.props.params} />; }
-  });
-  ReactDOM.render((
-    <Router history={history}>
-      <Route path="/" component={App}>
-        <Route path="/tags" component={PostsWrapper} >
-          <Route path="/tags/:tagName" component={Post}/>
-        </Route>
-        <Route path="/about" component={About}/>
-        <Route path="*" component={About}/>
-      </Route>
-    </Router>
-  ), document.getElementById("app"));
-};
 
 // configure a bootstrapped loader which checks
 // auth when needed and replaces itself with
@@ -53,12 +27,14 @@ const bootstrappedLoader = config => {
 export default (config) => {
   token = checkToken();
   load = bootstrappedLoader(config);
-  let tagName = checkTagName();
+  const tagName = checkTagName()
+    , root = document.getElementById("app");
+  App.setLoader(load).setDOMRoot(root);
+  root.appendChild(App.render().element);
   if (tagName) {
     removeTagName();
-    location.hash = "tags/"+tagName;
+    location.hash = "/tags/"+tagName;
   }
-  else { location.hash = "about"; }
-  renderApp();
+  else { location.hash = "/about"; }
 };
 

@@ -1,25 +1,39 @@
 import assert from "proclaim";
 
-import dom from "./dom";
-import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-
 import App from "../../src/components/App";
 
 describe("App", () => {
 
-  describe("rendering", () => {
+  it("should be defined as an object", function () {
+    assert.isObject(App);
+  });
 
-    before(function() {
-      this.renderedContainer = TestUtils.renderIntoDocument(
-        <App />
-      );
+  it("should have a `render` method", function () {
+    assert.isFunction(App.render);
+  });
+
+  describe("render", () => {
+
+    before(function () {
+      const appRoot = document.createElement("div");
+      App.setDOMRoot(appRoot);
+      this.appRoot = appRoot;
+      this.app = App.render(false); // `false` makes for shallow render;
     });
 
-    it("should render the app statics", function () {
-      const container = ReactDOM.findDOMNode(this.renderedContainer);
-      assert.isNotNull(container, "did not find container");
+    it("should accept 0 parameters", () => {
+      assert.equal(App.render.length, 0);
+    });
+
+    it("should return an object with an `element` property that is a DocumentFragment", function () {
+      assert.isNotNull(this.app);
+      const elem = this.app.element;
+      assert.isInstanceOf(elem, DocumentFragment);
+    });
+
+    it("should render the App component", function () {
+      const container = document.createElement("div");
+      container.appendChild(this.app.element);
       const heading = container.querySelector("h1");
       assert.isNotNull(heading, "did not find heading");
       const nav = container.querySelector("ul.nav");

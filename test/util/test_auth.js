@@ -1,8 +1,8 @@
 import assert from "proclaim";
 import { checkToken, requestToken } from "../../src/util/auth";
 
-import jsdom from "mocha-jsdom";
-jsdom({"skipWindowCheck": true});
+import jsdom from "jsdom-global";
+jsdom();
 
 
 describe("auth", () => {

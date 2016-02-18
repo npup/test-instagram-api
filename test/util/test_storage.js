@@ -1,6 +1,6 @@
 import assert from "proclaim";
-import jsdom from "mocha-jsdom";
-jsdom({"skipWindowCheck": true});
+import jsdom from "jsdom-global";
+jsdom();
 
 import { checkTagName, storeTagName, removeTagName } from "../../src/util/storage";
 

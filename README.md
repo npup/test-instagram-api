@@ -1,5 +1,7 @@
 # test-instagram-api
 
+This is the vanilla branch, deployed js weighing in at **about 27k** (without any compression)
+
 	$ git clone git@github.com:npup/test-instagram-api.git
 	$ cd test-instagram-api
 	$ npm i
