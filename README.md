@@ -1,7 +1,13 @@
 # test-instagram-api
 
+This is the master branch, deployed js weighing in at **about 860k** (without any compression).
+
 	$ git clone git@github.com:npup/test-instagram-api.git
 	$ cd test-instagram-api
+
+There is also a "vanilla" branch which uses no framework at all when deployed.  
+To try _that_ out, first do ```git checkout vanilla```, otherwise just do:
+
 	$ npm i
 
 Edit `SCP_DEPLOY_DESTINATION` in `.npmrc` to point to the deployment server directory.  
