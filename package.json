@@ -6,7 +6,7 @@
     "clean": "rm -rf dist/*",
     "test": "mocha -u bdd --compilers js:babel-core/register 'test/**/*.@(js)'",
     "build": "npm run clean && cp src/index.html dist/ && webpack",
-    "deploy": "npm test && npm run build && scp dist/* $npm_config_SCP_DEPLOY_DESTINATION"
+    "deploy": "npm run build && scp dist/* $npm_config_SCP_DEPLOY_DESTINATION"
   },
   "repository": {
     "type": "git",
